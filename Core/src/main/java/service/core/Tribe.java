@@ -1,11 +1,23 @@
 package service.core;
 
+import lombok.Getter;
+import lombok.Setter;
+import service.messages.MySerializable;
+
 import java.util.List;
 
-public class Tribe {
+public class Tribe implements MySerializable {
+    @Getter
+    @Setter
     private String ProgrammingLanguage;
+    @Getter
+    @Setter
     private List<UserInfo> Members;
+    @Getter
+    @Setter
     private String TribeName;
+    @Getter
+    @Setter
     private long TribeID;
 
     @Override
@@ -17,6 +29,8 @@ public class Tribe {
 
         return "Tribe Id: " + TribeID + ", Tribe Name: " + TribeName + ", Language: " + ProgrammingLanguage + ", Members: " + sb.toString().substring(0,sb.length()-2);
     }
+
+    public  Tribe(){};
 
     public Tribe(long TribeId, String TribeName, String programmaingLanguage, List<UserInfo> members){
         this.TribeID = TribeId;

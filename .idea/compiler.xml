@@ -2,13 +2,24 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="TriberSystem" />
-        <module name="Core" />
+        <module name="core" />
+        <module name="client" />
+        <module name="tribersystem" />
+        <module name="client3" />
+        <module name="communicator" />
+        <module name="client2" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="auldfellas" target="1.8" />
+      <module name="broker" target="1.8" />
+      <module name="dodgydrivers" target="1.8" />
+      <module name="girlpower" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

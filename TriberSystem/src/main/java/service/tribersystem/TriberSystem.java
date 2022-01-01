@@ -10,24 +10,10 @@ import java.util.List;
 
 public class TriberSystem {
     public List<Tribe> GetTribeSuggestions(UserInfo userInfo){
-        List<Tribe> ExistingTribes = new ArrayList<>();
+        List<Tribe> ExistingTribes;
         List<Tribe> FilteredTribes = new ArrayList<>();
-        Interests siddharthInterests = new Interests();
-        Interests mansoorInterests = new Interests();
-        Interests ritikaInterests = new Interests();
 
-        siddharthInterests.AddProgrammingLanguages("C#");
-        mansoorInterests.AddProgrammingLanguages("Java");
-        ritikaInterests.AddProgrammingLanguages("Java");
-
-        UserInfo siddharth = new UserInfo("Siddharth", "", siddharthInterests);
-        UserInfo mansoor = new UserInfo("Mansoor", "", mansoorInterests);
-        UserInfo ritika = new UserInfo("Ritika", "", ritikaInterests);
-
-        Tribe CSharpTribe = new Tribe(101, "CSharp Tribe", "C#", Arrays.asList(siddharth));
-        Tribe JavaTribe = new Tribe(102, "Java Tribe", "Java", Arrays.asList(ritika, mansoor));
-
-        ExistingTribes = Arrays.asList(JavaTribe, CSharpTribe);
+        ExistingTribes = GetExistingTribes();
 
         for(Tribe ExistingTribe:ExistingTribes){
             if(userInfo.getProgrammingLanguages().contains(ExistingTribe.getProgrammingLanguage())){
@@ -44,16 +30,24 @@ public class TriberSystem {
         Interests mansoorInterests = new Interests();
         Interests ritikaInterests = new Interests();
 
-        siddharthInterests.AddProgrammingLanguages("C#");
-        mansoorInterests.AddProgrammingLanguages("Java");
-        ritikaInterests.AddProgrammingLanguages("Java");
+        siddharthInterests.addProgrammingLanguages("C#");
+        mansoorInterests.addProgrammingLanguages("Java");
+        ritikaInterests.addProgrammingLanguages("Java");
 
-        UserInfo siddharth = new UserInfo("Siddharth", "", siddharthInterests);
-        UserInfo mansoor = new UserInfo("Mansoor", "", mansoorInterests);
-        UserInfo ritika = new UserInfo("Ritika", "", ritikaInterests);
+        UserInfo siddharth = new UserInfo("Siddharth", "", 101);
+        UserInfo mansoor = new UserInfo("Mansoor", "", 102);
+        UserInfo ritika = new UserInfo("Ritika", "", 103);
+
+        siddharth.setProgrammingLanguages(siddharthInterests.getProgrammingLanguages());
+        mansoor.setProgrammingLanguages(mansoorInterests.getProgrammingLanguages());
+        mansoor.setPortNumber(2555);
+        mansoor.setUniqueId(105105);
+        ritika.setProgrammingLanguages(ritikaInterests.getProgrammingLanguages());
+        ritika.setPortNumber(2558);
+        ritika.setUniqueId(105106);
 
         Tribe CSharpTribe = new Tribe(101, "CSharp Tribe", "C#", Arrays.asList(siddharth));
-        Tribe JavaTribe = new Tribe(102, "Java Tribe", "C#", Arrays.asList(ritika, mansoor));
+        Tribe JavaTribe = new Tribe(102, "Java Tribe", "Java", Arrays.asList(ritika, mansoor));
 
         ExistingTribes = Arrays.asList(JavaTribe, CSharpTribe);
 

@@ -1,16 +1,34 @@
 package service.core;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import service.messages.MySerializable;
 
-public class UserInfo {
+import java.util.ArrayList;
+
+public class UserInfo implements MySerializable {
+    @Getter
+    @Setter
     private String name;
+    @Getter
+    @Setter
     private String gitHubId;
+    @Getter
+    @Setter
     private Interests interests;
+    @Getter
+    @Setter
+    private long UniqueId;
+    @Getter
+    @Setter
+    private int PortNumber;
 
-    public UserInfo(String name, String gitHubId, Interests interests){
+    public UserInfo(){};
+    public UserInfo(String name, String gitHubId, long uniqueId){
         this.name = name;
         this.gitHubId = gitHubId;
-        this.interests = interests;
+        UniqueId = uniqueId;
+        interests = null;
     }
 
     public String getName() {
@@ -37,7 +55,24 @@ public class UserInfo {
         this.interests = interests;
     }
 
-    public List<String> getProgrammingLanguages(){
-        return interests.GetProgrammingLanguages();
+    public ArrayList<String> getProgrammingLanguages(){
+        return interests.getProgrammingLanguages();
+    }
+
+    public void setProgrammingLanguages(ArrayList<String> programmingLanguages){
+        interests = new Interests();
+        interests.setProgrammingLanguages(programmingLanguages);
+    }
+
+    public long getUniqueId() {
+        return UniqueId;
+    }
+
+    public int getPortNumber() {
+        return PortNumber;
+    }
+
+    public void setPortNumber(int portNumber) {
+        PortNumber = portNumber;
     }
 }
