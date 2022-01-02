@@ -1,2 +1,2 @@
-service\actor\Triber.class
-service\tribersystem\TriberSystem.class
+service/tribersystem/TriberSystem.class
+service/actor/Triber.class

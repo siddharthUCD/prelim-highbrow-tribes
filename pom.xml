@@ -1,42 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>lab6</groupId>
-    <artifactId>quoco-akka</artifactId>
-    <packaging>pom</packaging>
-    <version>0.0.1</version>
-    <modules>
-        <module>core</module>
-        <module>client</module>
-        <module>communicator</module>
-        <module>tribersystem</module>
-        <module>client2</module>
-        <module>client3</module>
-        <module>restsystem</module>
-    </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<modules>
+		<module>TriberSystem</module>
+		<module>user</module>
+		<module>client</module>
+		<module>client2</module>
+		<module>client3</module>
+		<module>communicator</module>
+		<module>restsystem</module>
+		<module>centralCore</module>
+	</modules>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.2</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>Tribes</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Tribes</name>
+	<description>User Creation for Highbrow Tribes</description>
+	<properties>
+<!--		<akka.version>2.6.0-M8</akka.version>-->
+		<java.version>11</java.version>
+	</properties>
 
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

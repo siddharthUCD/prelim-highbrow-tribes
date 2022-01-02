@@ -1,9 +1,12 @@
 package service.actor;
 
 import akka.actor.*;
-import service.core.Tribe;
-import service.core.UserInfo;
-import service.messages.*;
+import service.centralCore.Tribe;
+import service.centralCore.UserInfo;
+import service.messages.ChatMessageReceive;
+import service.messages.ChatMessageSend;
+import service.messages.ChatRegisterResponse;
+import service.messages.NewUserRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;

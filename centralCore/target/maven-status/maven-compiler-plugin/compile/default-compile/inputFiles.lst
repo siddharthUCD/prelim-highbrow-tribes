@@ -1,0 +1,16 @@
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/ChatRegisterRequest.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/NewUserRequest.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/NewUserResponse.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/TribeDetailResponse.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/InterestsRequest.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/MySerializable.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/ChatRegisterResponse.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/centralCore/Interests.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/UserCreationResponse.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/ChatMessageReceive.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/UserCreationRequest.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/TribeDetailRequest.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/centralCore/Tribe.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/centralCore/UserInfo.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/InterestsResponse.java
+/Users/mansoorchoudhury/IdeaProjects/Tribes/centralCore/src/main/java/service/messages/ChatMessageSend.java

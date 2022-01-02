@@ -1,8 +1,7 @@
 package service.actor;
 
 import akka.actor.*;
-import service.core.Tribe;
-import service.core.UserInfo;
+import service.centralCore.*;
 import service.messages.*;
 
 import java.util.HashMap;

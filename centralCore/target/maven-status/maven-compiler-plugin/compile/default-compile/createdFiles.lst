@@ -1,0 +1,16 @@
+service/messages/MySerializable.class
+service/messages/UserCreationResponse.class
+service/messages/TribeDetailResponse.class
+service/messages/InterestsResponse.class
+service/messages/ChatMessageReceive.class
+service/messages/TribeDetailRequest.class
+service/messages/ChatMessageSend.class
+service/messages/NewUserRequest.class
+service/centralCore/Tribe.class
+service/centralCore/Interests.class
+service/messages/UserCreationRequest.class
+service/centralCore/UserInfo.class
+service/messages/ChatRegisterResponse.class
+service/messages/ChatRegisterRequest.class
+service/messages/InterestsRequest.class
+service/messages/NewUserResponse.class

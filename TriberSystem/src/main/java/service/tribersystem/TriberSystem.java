@@ -1,8 +1,8 @@
 package service.tribersystem;
 
-import service.core.Interests;
-import service.core.Tribe;
-import service.core.UserInfo;
+
+
+import service.centralCore.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
