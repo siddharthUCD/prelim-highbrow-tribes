@@ -67,7 +67,7 @@ public class Client2 extends AbstractActor {
         UI.setName("Ritika");
         HashSet<String> programmingLanguages = new HashSet<>();
         programmingLanguages.add("Java");
-        UI.setProgrammingLanguages(programmingLanguages);
+//        UI.setProgrammingLanguages(programmingLanguages);
 
         ChatRegisterRequest chatRegisterRequest = new ChatRegisterRequest();
         chatRegisterRequest.set_UserInfo(UI);
