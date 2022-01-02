@@ -16,7 +16,7 @@ public class TriberSystem {
         ExistingTribes = GetExistingTribes();
 
         for(Tribe ExistingTribe:ExistingTribes){
-            if(userInfo.getProgrammingLanguages().contains(ExistingTribe.getProgrammingLanguage())){
+            if(userInfo.getInterests().getProgrammingLanguages().contains(ExistingTribe.getProgrammingLanguage())){
                 FilteredTribes.add(ExistingTribe);
             }
         }
@@ -38,11 +38,11 @@ public class TriberSystem {
         UserInfo mansoor = new UserInfo("Mansoor", "", 102);
         UserInfo ritika = new UserInfo("Ritika", "", 103);
 
-        siddharth.setProgrammingLanguages(siddharthInterests.getProgrammingLanguages());
-        mansoor.setProgrammingLanguages(mansoorInterests.getProgrammingLanguages());
+//        siddharth.setProgrammingLanguages(siddharthInterests.getProgrammingLanguages());
+//        mansoor.setProgrammingLanguages(mansoorInterests.getProgrammingLanguages());
         mansoor.setPortNumber(2555);
         mansoor.setUniqueId(105105);
-        ritika.setProgrammingLanguages(ritikaInterests.getProgrammingLanguages());
+//        ritika.setProgrammingLanguages(ritikaInterests.getProgrammingLanguages());
         ritika.setPortNumber(2558);
         ritika.setUniqueId(105106);
 

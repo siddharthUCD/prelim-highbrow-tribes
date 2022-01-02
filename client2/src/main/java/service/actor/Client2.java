@@ -12,10 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Client2 extends AbstractActor {
     @Override
@@ -68,7 +65,7 @@ public class Client2 extends AbstractActor {
         UI.setUniqueId(105106);
         UI.setPortNumber(2558);
         UI.setName("Ritika");
-        ArrayList<String> programmingLanguages = new ArrayList<>();
+        HashSet<String> programmingLanguages = new HashSet<>();
         programmingLanguages.add("Java");
         UI.setProgrammingLanguages(programmingLanguages);
 

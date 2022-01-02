@@ -7,34 +7,13 @@ import service.core.UserInfo;
 public class NewUserRequest implements MySerializable{
     @Getter
     @Setter
-    private long RequestId;
-    @Getter
-    @Setter
-    private UserInfo NewUser;
+    private UserInfo newUser;
 
     public NewUserRequest(){};
-    public NewUserRequest(long requestId, UserInfo newUser) {
-        this.RequestId = requestId;
-        this.NewUser = newUser;
+
+    public NewUserRequest(UserInfo newUser) {
+        this.newUser = newUser;
     }
 
-    public long getRequestId() {
-        return RequestId;
-    }
 
-    public UserInfo getUserInfo() {
-        return NewUser;
-    }
-
-    public String getName(){
-        return NewUser.getName();
-    }
-
-    public long getUniqueId(){
-        return NewUser.getUniqueId();
-    }
-
-    public String getGithubId(){
-        return NewUser.getGitHubId();
-    }
 }

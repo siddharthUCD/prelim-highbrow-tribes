@@ -6,14 +6,16 @@ import lombok.Setter;
 public class InterestsRequest implements MySerializable{
     @Getter
     @Setter
-    private long RequestId;
+    private String githubUserId;
+    @Getter
+    @Setter
+    private long requestId;
 
     public InterestsRequest(){};
-    public InterestsRequest(long requestId) {
-        RequestId = requestId;
+    public InterestsRequest(long requestId, String githubUserId) {
+        this.requestId = requestId;
+        this.githubUserId = githubUserId;
     }
 
-    public long getRequestId() {
-        return RequestId;
-    }
+
 }

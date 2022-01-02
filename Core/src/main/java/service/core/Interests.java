@@ -5,25 +5,25 @@ import lombok.Setter;
 import service.messages.MySerializable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Interests implements MySerializable {
     @Getter
     @Setter
-    private ArrayList<String> ProgrammingLanguages;
+    //private ArrayList<String> programmingLanguages;
+    private HashSet<String> programmingLanguages;
 
     public Interests(){
-        ProgrammingLanguages = new ArrayList<>();
+        //programmingLanguages = new ArrayList<>();
+        programmingLanguages = new HashSet<String>();
     }
 
-    public ArrayList<String> getProgrammingLanguages() {
-        return ProgrammingLanguages;
+    public Interests(HashSet<String> programmingLanguages){
+        this.programmingLanguages = programmingLanguages;
     }
 
-    public void setProgrammingLanguages(ArrayList<String> programmingLanguages) {
-        ProgrammingLanguages = programmingLanguages;
-    }
 
     public void addProgrammingLanguages(String programmingLanguage){
-        ProgrammingLanguages.add(programmingLanguage);
+        programmingLanguages.add(programmingLanguage);
     }
 }

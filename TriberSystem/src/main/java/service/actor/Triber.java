@@ -4,7 +4,6 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorSelection;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import service.core.Interests;
 import service.core.Tribe;
 import service.core.UserInfo;
 import service.messages.*;
@@ -12,7 +11,6 @@ import service.tribersystem.TriberSystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Triber extends AbstractActor {
     private static TriberSystem triberSystem;
@@ -27,7 +25,7 @@ public class Triber extends AbstractActor {
         System.out.println("1) Test here");
         ActorSystem system = ActorSystem.create();
         system.actorOf(Props.create(Triber.class), "triber");
-        InterestsActor = system.actorSelection("akka.tcp://default@127.0.0.1:2551/user/interest");
+        InterestsActor = system.actorSelection("akka.tcp://default@127.0.0.1:2554/user/interests");
         PersistanceActor = system.actorSelection("akka.tcp://default@127.0.0.1:2551/user/persistance");
 
         /*
@@ -44,13 +42,12 @@ public class Triber extends AbstractActor {
         return receiveBuilder()
                 .match(NewUserRequest.class,
                         msg -> {
-                            System.out.println("User Creation Request for Name: " + msg.getUserInfo().getName() + " with ID: " + msg.getRequestId() + " sent to interests service");
+                            System.out.println("User Creation Request for Name: " + msg.getNewUser().getName() + " with ID: " + msg.getNewUser().getUniqueId() + " sent to interests service");
                             long tempSeed = SEED++;
-                            RequestsToUserInfoMap.put(tempSeed, new UserInfo(msg.getName(), msg.getGithubId(), tempSeed));
-                            /*
+                            RequestsToUserInfoMap.put(tempSeed, new UserInfo(msg.getNewUser().getName(), msg.getNewUser().getGitHubId(), tempSeed));
                               //An Interests request will be sent to Ritika
-                              InterestsActor.tell(new InterestsRequest(msg.getUniqueId()), getSelf());
-                            */
+                            InterestsActor.tell(new InterestsRequest(msg.getNewUser().getUniqueId(),msg.getNewUser().getGitHubId()), getSelf());
+
                         })
                 .match(InterestsResponse.class,
                         msg -> {

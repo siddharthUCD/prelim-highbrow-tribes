@@ -7,22 +7,22 @@ import service.core.Interests;
 public class InterestsResponse implements MySerializable{
     @Getter
     @Setter
-    private long RequestId;
+    private long requestId;
     @Getter
     @Setter
-    private Interests _Interest;
+    private Interests interest;
 
     public InterestsResponse(){};
     public InterestsResponse(long requestId, Interests interest) {
-        this.RequestId = requestId;
-        this._Interest = interest;
+        this.requestId = requestId;
+        this.interest = interest;
     }
 
     public long getRequestId() {
-        return RequestId;
+        return requestId;
     }
 
     public Interests getInterests() {
-        return _Interest;
+        return interest;
     }
 }
