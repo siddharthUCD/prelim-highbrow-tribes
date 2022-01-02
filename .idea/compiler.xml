@@ -8,11 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
-        <module name="client" />
         <module name="tribersystem" />
         <module name="client3" />
+        <module name="client" />
+        <module name="restsystem" />
         <module name="communicator" />
         <module name="client2" />
+        <module name="centralCore" />
+        <module name="triber" />
+        <module name="user" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,5 +25,17 @@
       <module name="dodgydrivers" target="1.8" />
       <module name="girlpower" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="centralCore" options="-parameters" />
+      <module name="client" options="-parameters" />
+      <module name="client2" options="-parameters" />
+      <module name="client3" options="-parameters" />
+      <module name="communicator" options="-parameters" />
+      <module name="restsystem" options="-parameters" />
+      <module name="triber" options="-parameters" />
+      <module name="user" options="-parameters" />
+    </option>
   </component>
 </project>
