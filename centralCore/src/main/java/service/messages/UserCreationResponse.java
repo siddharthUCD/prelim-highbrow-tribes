@@ -1,6 +1,6 @@
 package service.messages;
 
-public class UserCreationResponse {
+public class UserCreationResponse implements MySerializable{
     private long uniqueId;
 
     public UserCreationResponse(long responseId) {

@@ -1,7 +1,5 @@
 package service.tribersystem;
 
-
-
 import service.centralCore.*;
 
 import java.util.ArrayList;

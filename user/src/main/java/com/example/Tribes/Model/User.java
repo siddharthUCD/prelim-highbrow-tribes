@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @Entity
 public class User {
@@ -14,11 +15,11 @@ public class User {
     private Long UniqueId;
     private String name;
     private int tribeId;
-    private ArrayList<String> programmingLanguage;
+    private String programmingLanguage;
     private String gitHubId;
 
 
-    public User(String name, int tribeId, ArrayList<String> programmingLanguage,String gitHubId) {
+    public User(String name, int tribeId, String programmingLanguage,String gitHubId) {
         this.name = name;
         this.tribeId = tribeId;
         this.programmingLanguage = programmingLanguage;
@@ -51,11 +52,11 @@ public class User {
         this.tribeId = tribeId;
     }
 
-    public ArrayList<String> getProgrammingLanguage() {
+    public String getProgrammingLanguage() {
         return programmingLanguage;
     }
 
-    public void setProgrammingLanguage(ArrayList<String> programmingLanguage) {
+    public void setProgrammingLanguage(String programmingLanguage) {
         this.programmingLanguage = programmingLanguage;
     }
 

@@ -17,12 +17,4 @@ public class InterestsResponse implements MySerializable {
         this.requestId = requestId;
         this.interest = interest;
     }
-
-    public long getRequestId() {
-        return requestId;
-    }
-
-    public Interests getInterests() {
-        return interest;
-    }
 }

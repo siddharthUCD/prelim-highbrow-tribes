@@ -3,28 +3,20 @@ package service.messages;
 import lombok.Getter;
 import lombok.Setter;
 import service.centralCore.Tribe;
+import service.centralCore.UserInfo;
 
 import java.util.List;
 
-public class NewUserResponse implements MySerializable{
+public class NewUserResponse implements MySerializable {
     @Getter
     @Setter
-    private long RequestId;
+    private long requestId;
     @Getter
     @Setter
-    private List<Tribe> SuggestedTribes;
+    private UserInfo userInfo;
 
-    public NewUserResponse(){};
-    public NewUserResponse(long requestId, List<Tribe> suggestedTribes) {
-        RequestId = requestId;
-        SuggestedTribes = suggestedTribes;
-    }
-
-    public long getRequestId() {
-        return RequestId;
-    }
-
-    public List<Tribe> getSuggestedTribes() {
-        return SuggestedTribes;
+    public NewUserResponse(long requestId, UserInfo userInfo) {
+        this.requestId = requestId;
+        this.userInfo = userInfo;
     }
 }

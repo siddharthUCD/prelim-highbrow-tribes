@@ -23,7 +23,7 @@ public class Actor extends AbstractActor {
                     if(Constants.configurableApplicationContext == null) {
                         TribesApplication.main(new String[0]);
                     }
-                   getSender().tell(new NewUserResponse(msg.getRequestId(),TribesApplication.getUserInfo(msg.getRequestId())),getSelf());
+                   getSender().tell(new NewUserResponse(msg.getNewUser().getUniqueId(),TribesApplication.getUserInfo(msg.getNewUser().getUniqueId())),getSelf());
                 }).build();
     }
 }

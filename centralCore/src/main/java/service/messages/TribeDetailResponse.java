@@ -17,12 +17,4 @@ public class TribeDetailResponse implements MySerializable{
         UniqueId = uniqueId;
         this.tribe = tribe;
     }
-
-    public long getUniqueId() {
-        return UniqueId;
-    }
-
-    public Tribe getTribe() {
-        return tribe;
-    }
 }

@@ -4,77 +4,90 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorSelection;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import jnr.ffi.annotations.In;
 import service.centralCore.*;
 import service.messages.*;
 import service.tribersystem.TriberSystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Triber extends AbstractActor {
     private static TriberSystem triberSystem;
-    private static long SEED = 1;
-    HashMap<Long, UserInfo> RequestsToUserInfoMap = new HashMap<Long, UserInfo>();
-    ArrayList<Tribe> AllTribes = new ArrayList<>();
+    private static long userUniqueId = 1;
+    private static long tribeUniqueId = 1;
+    private static ActorSelection interestsActor;
+    private static ActorSelection persistanceActor;
 
-    private static ActorSelection InterestsActor;
-    private static ActorSelection PersistanceActor;
+    HashMap<Long, UserInfo> requestsToUserInfoMap = new HashMap<Long, UserInfo>();
+    HashMap<Long, Long> uniqueIdMap = new HashMap<Long, Long>();
+    ArrayList<Tribe> allTribes = new ArrayList<>();
+    ArrayList<UserInfo> allUsers = new ArrayList<>();
 
     public static void main(String[] args){
         System.out.println("1) Test here");
         ActorSystem system = ActorSystem.create();
         system.actorOf(Props.create(Triber.class), "triber");
-        InterestsActor = system.actorSelection("akka.tcp://default@127.0.0.1:2554/user/interests");
-        PersistanceActor = system.actorSelection("akka.tcp://default@127.0.0.1:2552/user/userSystem");
-
-        /*
-        An initialization request will be sent ot Mansoor and list of all the tribes and use info will be
-        returned and stored in the RequestsToUserInfoMap & AllTribes attributes
-        */
+        interestsActor = system.actorSelection("akka.tcp://default@127.0.0.1:2554/user/interests");
+        persistanceActor = system.actorSelection("akka.tcp://default@127.0.0.1:2552/user/userSystem");
 
         System.out.println("2) Test here");
-//        UserInfo userInfo = new UserInfo("Ridhi","ridhi1",1000L);
-//        Interests interests = new Interests();
-//        interests.addProgrammingLanguages("Java");
-//        userInfo.setInterests(interests);
-//        NewUserRequest NUR = new NewUserRequest();
-//        PersistanceActor.tell(new UserCreationRequest(1000L,userInfo), null);
-        triberSystem = new TriberSystem();
+        persistanceActor.tell("InitializeTriberSystem", null);
     }
 
     @Override
     public Receive createReceive() {
         return receiveBuilder()
-                .match(NewUserRequest.class,
-                        msg -> {
-                            System.out.println("User Creation Request for Name: " + msg.getNewUser().getName() + " with ID: " + msg.getNewUser().getUniqueId() + " sent to interests service");
-                            long tempSeed = SEED++;
-                            RequestsToUserInfoMap.put(tempSeed, new UserInfo(msg.getNewUser().getName(), msg.getNewUser().getGitHubId(), tempSeed));
-                              //An Interests request will be sent to Ritika
-                            InterestsActor.tell(new InterestsRequest(msg.getNewUser().getUniqueId(),msg.getNewUser().getGitHubId()), getSelf());
+            .match(TriberInitializationResponse.class,
+                msg -> {
+                    allTribes = msg.getAllTribes();
+                    allUsers = msg.getAllUsers();
+                    userUniqueId = msg.getMaxUserId();
+                    tribeUniqueId = msg.getMaxTribeId();
+                })
+            .match(NewUserRequest.class,
+                msg -> {
+                    System.out.println("User Creation Request for Name: " + msg.getNewUser().getName() + " with ID: " + msg.getNewUser().getUniqueId() + " sent to interests service");
 
-                        })
-                .match(InterestsResponse.class,
-                        msg -> {
-                            RequestsToUserInfoMap.get(msg.getRequestId()).setInterests(msg.getInterests());
-                        })
-                .match(TribeDetailRequest.class,
-                        msg -> {
-//                            Interests i = new Interests();
-//                            i.addProgrammingLanguages("C#");
-//
-//                            UserInfo us = new UserInfo("Mandvi", "", 105);
-//
-//                            us.setProgrammingLanguages(i.getProgrammingLanguages());
-//                            List<Tribe> suggestedTribes = triberSystem.GetTribeSuggestions(us);
+                    //Adding new User
+                    long tempUserUniqueId = ++userUniqueId;
+                    uniqueIdMap.put(msg.getNewUser().getUniqueId(), tempUserUniqueId);
+                    requestsToUserInfoMap.put(tempUserUniqueId, new UserInfo(msg.getNewUser().getName(), msg.getNewUser().getGitHubId(), tempUserUniqueId));
 
-                            Tribe tribe = triberSystem.GetExistingTribes().get(0);
-                            getSender().tell(new TribeDetailResponse(msg.getUniqueId(), tribe), null);
-                        })
-                .match(NewUserResponse.class,
-                        msg -> {
-                            System.out.println("User Creation Response for Id: " + msg.getRequestId() + " sent to the API gateway or the bridge service");
-                        }).build();
+                    //Interests request sent to Ritika
+                    interestsActor.tell(new InterestsRequest(msg.getNewUser().getUniqueId(),msg.getNewUser().getGitHubId()), getSelf());
+                })
+            .match(InterestsResponse.class,
+                msg -> {
+                    System.out.println("Received Interests response from Ritika: " + msg.getRequestId());
+                    requestsToUserInfoMap.get(msg.getRequestId()).setInterests(msg.getInterest());
+
+                    TribeSuggestion ts = new TribeSuggestion();
+                    ts.setSuggestedTribes(getTribeSuggestions(msg.getInterest()));
+
+                    System.out.println("Sent user persistance to Mansoor: " + msg.getRequestId());
+                    persistanceActor.tell(UCR, getSelf());
+                })
+            .match(TribeDetailRequest.class,
+                msg -> {
+                    Tribe tribe = triberSystem.GetExistingTribes().get(0);
+                    getSender().tell(new TribeDetailResponse(msg.getUniqueId(), tribe), null);
+                })
+            .match(NewUserResponse.class,
+                msg -> {
+                    System.out.println("User Creation Response for Id: " + msg.getRequestId() + " sent to the API gateway or the bridge service");
+                }).build();
+    }
+
+    private HashSet<Tribe> getTribeSuggestions(Interests interests){
+        HashSet<Tribe> filteredTribes = new HashSet<>();
+
+        for(Tribe existingTribe:allTribes){
+            if(interests.getProgrammingLanguages().contains(existingTribe.getProgrammingLanguage())){
+                filteredTribes.add(existingTribe);
+            }
+        }
+
+        return filteredTribes;
     }
 }

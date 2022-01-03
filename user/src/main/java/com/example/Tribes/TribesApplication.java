@@ -5,12 +5,13 @@ import com.example.Tribes.Repo.Constants;
 import com.example.Tribes.Repo.UserRepo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import service.core.Interests;
-import service.core.UserInfo;
+import service.centralCore.Interests;
+import service.centralCore.UserInfo;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+
 
 @SpringBootApplication
 public class TribesApplication {
@@ -21,7 +22,7 @@ public class TribesApplication {
 
 	public static void setUserInfo(final UserInfo userInfo){
 		UserRepo userRepo = Constants.configurableApplicationContext.getBean(UserRepo.class);
-		User user = new User(userInfo.getName(),0,userInfo.getProgrammingLanguages(),userInfo.getGitHubId());
+		User user = new User(userInfo.getName(),userInfo.getTribeId(), userInfo.getInterests().getProgrammingLanguages().stream().collect(Collectors.joining(",")),userInfo.getGitHubId());
 		userRepo.save(user);
 	}
 
@@ -29,7 +30,9 @@ public class TribesApplication {
 		UserRepo userRepo = Constants.configurableApplicationContext.getBean(UserRepo.class);
 		User user = userRepo.findById(uniqueId).get();
 		Interests interests = new Interests();
-		interests.setProgrammingLanguages(user.getProgrammingLanguage());
-		return new UserInfo(user.getName(),user.getGitHubId(),interests);
+		HashSet<String> programmingLanguages = new HashSet<>(Arrays.asList(user.getProgrammingLanguage().split(",")));
+
+		interests.setProgrammingLanguages(programmingLanguages);
+		return new UserInfo(user.getName(),user.getGitHubId(),uniqueId);
 	}
 }

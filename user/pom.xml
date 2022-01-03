@@ -76,7 +76,7 @@
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>centralCore</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

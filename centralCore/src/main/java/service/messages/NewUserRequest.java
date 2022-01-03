@@ -14,6 +14,4 @@ public class NewUserRequest implements MySerializable{
     public NewUserRequest(UserInfo newUser) {
         this.newUser = newUser;
     }
-
-
 }
