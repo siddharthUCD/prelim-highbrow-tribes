@@ -24,9 +24,9 @@ public class UserInfo implements MySerializable {
     private int PortNumber;
     @Getter
     @Setter
-    private int tribeId;
+    private long tribeId;
 
-    public UserInfo(){};
+    public UserInfo(){}
     public UserInfo(String name, String gitHubId, long uniqueId){
         this.name = name;
         this.gitHubId = gitHubId;

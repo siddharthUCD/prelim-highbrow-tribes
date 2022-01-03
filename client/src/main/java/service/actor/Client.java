@@ -3,11 +3,9 @@ package service.actor;
 import akka.actor.*;
 import service.centralCore.Tribe;
 import service.centralCore.UserInfo;
-import service.messages.ChatMessageReceive;
-import service.messages.ChatMessageSend;
-import service.messages.ChatRegisterResponse;
-import service.messages.NewUserRequest;
+import service.messages.*;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,38 +38,62 @@ public class Client extends AbstractActor {
         setReference(uniqueId);
 
         NewUserRequest newUserRequest  = new NewUserRequest(UI);
+
+        System.out.println("User has sent newUserRequest to Triber");
+
         triberSelection.tell(newUserRequest, ref);
     }
 
     @Override
     public AbstractActor.Receive createReceive() {
-        /**
-         * Read the message from the broker and display the quotations from all services against the client info
-         */
         return  receiveBuilder()
             .match(ChatRegisterResponse.class, msg->{
                 Tribe CurrTribe = msg.getTribe();
                 System.out.println("You have joined the community dialogue of " + CurrTribe.getTribeName());
-                Thread thread = new Thread(){
-                    public void run(){
-                        IsInChat = true;
-                        ParticipateInChat();
-                    }
-                };
+                Thread thread = new Thread(() -> {
+                    IsInChat = true;
+                    ParticipateInChat();
+                });
                 thread.start();
             })
             .match(ChatMessageReceive.class, msg->{
                 System.out.println("[" + msg.getSentTime() + "] " + msg.getSenderName() + ": " + msg.getMessage());
 
-                Thread thread = new Thread(){
-                    public void run(){
-                        ParticipateInChat();
-                    }
-                };
+                Thread thread = new Thread(this::ParticipateInChat);
 
                 if(!IsInChat){
                     IsInChat = true;
                     thread.start();
+                }
+            })
+            .match(TribeSuggestion.class, msg->{
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(System.in));
+                StringBuilder sb;
+                System.out.println("Received tribe suggestions");
+                System.out.println("Enter the ID of the tribe you would like to join");
+                for(Tribe tribe:msg.getSuggestedTribes()){
+                    sb = new StringBuilder();
+
+                    for(UserInfo UI:tribe.getMembers()){
+                        sb.append(UI.getName()).append(", ");
+                    }
+
+                    System.out.println("Tribe ID: " + tribe.getTribeID() + ", Programming Language: " + tribe.getProgrammingLanguage() + ", Tribe Name: " + tribe.getTribeName() + ", Members: " + sb);
+                }
+                String tribeIdString = reader.readLine();
+
+                try {
+                    long tribeIdLong = Long.parseLong(tribeIdString);
+
+                    UI.setUniqueId(msg.getUniqueId());
+                    setReference(msg.getUniqueId());
+                    UI.setTribeId(tribeIdLong);
+
+                    triberSelection.tell(UI, getSelf());
+                }
+                catch(Exception ex){
+                    System.out.print("Invalid Input! Restart application");
                 }
             }).build();
     }

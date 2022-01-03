@@ -14,12 +14,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UniqueId;
     private String name;
-    private int tribeId;
+    private Long tribeId;
     private String programmingLanguage;
     private String gitHubId;
 
 
-    public User(String name, int tribeId, String programmingLanguage,String gitHubId) {
+    public User(String name, long tribeId, String programmingLanguage,String gitHubId) {
         this.name = name;
         this.tribeId = tribeId;
         this.programmingLanguage = programmingLanguage;
@@ -44,11 +44,11 @@ public class User {
         this.name = name;
     }
 
-    public int getTribeId() {
+    public long getTribeId() {
         return tribeId;
     }
 
-    public void setTribeId(int tribeId) {
+    public void setTribeId(long tribeId) {
         this.tribeId = tribeId;
     }
 

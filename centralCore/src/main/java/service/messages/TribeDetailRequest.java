@@ -8,12 +8,8 @@ public class TribeDetailRequest implements MySerializable{
     @Setter
     private long UniqueId;
 
-    public TribeDetailRequest(){};
+    public TribeDetailRequest(){}
     public TribeDetailRequest(long uniqueId) {
         UniqueId = uniqueId;
-    }
-
-    public long getUniqueId() {
-        return UniqueId;
     }
 }

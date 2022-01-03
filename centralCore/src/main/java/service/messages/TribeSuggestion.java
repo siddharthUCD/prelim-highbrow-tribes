@@ -9,5 +9,8 @@ import java.util.HashSet;
 public class TribeSuggestion {
     @Getter
     @Setter
-    public HashSet<Tribe> suggestedTribes;
+    private HashSet<Tribe> suggestedTribes;
+    @Getter
+    @Setter
+    private long uniqueId;
 }

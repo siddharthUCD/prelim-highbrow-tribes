@@ -11,11 +11,9 @@ public class InterestsRequest implements MySerializable {
     @Setter
     private long requestId;
 
-    public InterestsRequest(){};
+    public InterestsRequest(){}
     public InterestsRequest(long requestId, String githubUserId) {
         this.requestId = requestId;
         this.githubUserId = githubUserId;
     }
-
-
 }
